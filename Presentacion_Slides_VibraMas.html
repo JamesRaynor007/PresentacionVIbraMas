@@ -1,0 +1,1177 @@
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibra Más — Presentación Ejecutiva y Plan Maestro 2026-2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #F8F7F4;
+      --bg-card: #FFFFFF;
+      --primary-deep: #162B21;
+      --primary: #2D6A4F;
+      --primary-light: #40916C;
+      --primary-subtle: #E8F5EE;
+      --accent-gold: #C99738;
+      --accent-gold-soft: #FBF4E6;
+      --accent-warm: #D97757;
+      --accent-navy: #1F3652;
+      --text-dark: #1E2522;
+      --text-muted: #5C6B64;
+      --text-light: #8E9B95;
+      --border-soft: #E5E9E6;
+      --radius-sm: 10px;
+      --radius-md: 18px;
+      --radius-lg: 26px;
+      --shadow-subtle: 0 4px 20px rgba(22, 43, 33, 0.05);
+      --shadow-float: 0 12px 35px rgba(22, 43, 33, 0.09);
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--primary-deep);
+      color: var(--text-dark);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Presentation Container (16:9 Aspect Ratio) */
+    .deck-container {
+      width: 95vw;
+      max-width: 1240px;
+      height: 88vh;
+      max-height: 720px;
+      background: var(--bg-main);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Top Progress Bar */
+    .top-progress-bar {
+      height: 5px;
+      background: rgba(45, 106, 79, 0.15);
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 50;
+    }
+
+    .top-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent-gold));
+      width: 10%;
+      transition: width 0.4s ease;
+    }
+
+    /* Header Bar */
+    .deck-header {
+      padding: 16px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-soft);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      z-index: 40;
+    }
+
+    .brand-tag {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--accent-gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--primary-deep);
+      letter-spacing: -0.3px;
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .slide-counter-badge {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      background: var(--primary-subtle);
+      padding: 5px 14px;
+      border-radius: 20px;
+    }
+
+    /* Slides Content Wrapper */
+    .slides-wrapper {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 34px 44px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(40px);
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+      overflow-y: auto;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+      z-index: 10;
+    }
+
+    .slide.prev {
+      transform: translateX(-40px);
+    }
+
+    /* Slide Typography */
+    .slide-eyebrow {
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--accent-gold);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .slide-eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      display: inline-block;
+    }
+
+    .slide-title {
+      font-family: var(--font-heading);
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--primary-deep);
+      letter-spacing: -0.6px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .slide-subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      max-width: 850px;
+      line-height: 1.45;
+    }
+
+    /* Slide 1 - Hero */
+    .hero-slide {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px;
+      background: radial-gradient(circle at 50% 30%, rgba(201, 151, 56, 0.08), transparent 70%);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-gold-soft);
+      border: 1px solid rgba(201, 151, 56, 0.3);
+      color: #936814;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 18px;
+      border-radius: 30px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 46px;
+      font-weight: 800;
+      color: var(--primary-deep);
+      line-height: 1.15;
+      letter-spacing: -1.2px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title span {
+      color: var(--primary);
+    }
+
+    .hero-tagline {
+      font-size: 20px;
+      font-style: italic;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto 28px;
+      line-height: 1.4;
+    }
+
+    .hero-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 780px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .hero-meta-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 16px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-subtle);
+      text-align: left;
+    }
+
+    .hero-meta-card .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-light);
+      letter-spacing: 0.6px;
+    }
+
+    .hero-meta-card .val {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary-deep);
+      margin-top: 4px;
+    }
+
+    /* Grid Layouts for Content Slides */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      flex: 1;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      flex: 1;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      flex: 1;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: var(--shadow-subtle);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-float);
+      border-color: rgba(45, 106, 79, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .card-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 14px;
+      background: var(--primary-subtle);
+      color: var(--primary);
+    }
+
+    .card-icon.gold {
+      background: var(--accent-gold-soft);
+      color: var(--accent-gold);
+    }
+
+    .card-icon.navy {
+      background: #E8EEF5;
+      color: var(--accent-navy);
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary-deep);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .card-footer-badge {
+      margin-top: 14px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #F1F4F2;
+      color: var(--text-muted);
+      display: inline-block;
+      width: fit-content;
+    }
+
+    /* Checklist Box */
+    .checklist-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .checklist-table th {
+      text-align: left;
+      padding: 10px 14px;
+      background: #F0F4F2;
+      color: var(--primary-deep);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      border-radius: 6px;
+    }
+
+    .checklist-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-soft);
+      color: var(--text-dark);
+    }
+
+    .badge-check {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--primary-subtle);
+      color: var(--primary);
+    }
+
+    /* Timeline / Gantt Summary */
+    .timeline-strip {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .timeline-month {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .timeline-badge {
+      min-width: 90px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13px;
+      text-align: center;
+      background: var(--primary-deep);
+      color: #fff;
+    }
+
+    .timeline-badge.cycle2 {
+      background: var(--accent-gold);
+      color: #fff;
+    }
+
+    .timeline-content {
+      flex: 1;
+    }
+
+    .timeline-content h4 {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary-deep);
+      margin-bottom: 4px;
+    }
+
+    .timeline-content p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Key Metrics / Highlights */
+    .highlight-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #EAF4EE;
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 12.5px;
+    }
+
+    /* Navigation Controls Footer */
+    .deck-footer {
+      padding: 14px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-soft);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 40;
+    }
+
+    .footer-help {
+      font-size: 12px;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .kbd {
+      background: #EAEAEA;
+      border: 1px solid #D0D0D0;
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-family: monospace;
+      color: var(--text-dark);
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 9px 20px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .btn-secondary {
+      background: #EFEFEF;
+      color: var(--text-dark);
+    }
+
+    .btn-secondary:hover {
+      background: #E2E2E2;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-gold {
+      background: var(--accent-gold);
+      color: #fff;
+    }
+
+    .btn-gold:hover {
+      background: #B3832B;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 900px) {
+      .deck-container {
+        width: 100vw;
+        height: 100vh;
+        max-height: none;
+        border-radius: 0;
+      }
+
+      .slide {
+        padding: 20px 20px;
+      }
+
+      .grid-2,
+      .grid-3,
+      .grid-4 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title {
+        font-size: 32px;
+      }
+
+      .hero-meta-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="deck-container">
+    <!-- Progress Bar -->
+    <div class="top-progress-bar">
+      <div class="top-progress-fill" id="progressFill"></div>
+    </div>
+
+    <!-- Header -->
+    <div class="deck-header">
+      <div class="brand-tag">
+        <div class="brand-logo-mark">V+</div>
+        <div>
+          <div class="brand-title">Vibra Más &bull; Presentación Ejecutiva</div>
+          <div class="brand-sub">Socias: Joana &amp; Yoshi &bull; Necochea, Argentina</div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <a href="https://drive.google.com/drive/folders/1tRCQiAtO5I9c3do4pdCgR_ixU_603L7j" target="_blank"
+          class="highlight-pill" style="text-decoration: none; font-size: 11.5px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z" />
+          </svg>
+          Google Drive Oficial
+        </a>
+        <div class="slide-counter-badge" id="slideBadge">Slide 1 / 10</div>
+      </div>
+    </div>
+
+    <!-- Slides Wrapper -->
+    <div class="slides-wrapper">
+
+      <!-- SLIDE 1: PORTADA -->
+      <div class="slide hero-slide active" data-slide="1">
+        <div class="hero-badge">Plan Maestro Estratégico 2026-2027</div>
+        <h1 class="hero-title">El Ecosistema Digital de <span>Vibra Más</span></h1>
+        <p class="hero-tagline">"Una forma de habitar tu cuerpo, estés donde estés."</p>
+
+        <div class="hero-meta-grid">
+          <div class="hero-meta-card">
+            <div class="label">Socias Fundadoras</div>
+            <div class="val">Joana &amp; Yoshi</div>
+          </div>
+          <div class="hero-meta-card">
+            <div class="label">Ubicación y Alcance</div>
+            <div class="val">Necochea &bull; Presencial + Online</div>
+          </div>
+          <div class="hero-meta-card">
+            <div class="label">Horizonte de Implementación</div>
+            <div class="val">6 Meses &bull; 2 Ciclos Ejecutivos</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: LA FILOSOFÍA CENTRAL -->
+      <div class="slide" data-slide="2">
+        <div class="slide-eyebrow">Principios Rectores</div>
+        <h2 class="slide-title">La Regla de Oro: 30 Segundos para Conectar</h2>
+        <p class="slide-subtitle">El bienestar no tolera fricciones técnicas ni interfaces frías. Cada visitante que
+          llegue desde Instagram o WhatsApp debe comprender quiénes somos y cómo empezar de inmediato.</p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-icon">⚡</div>
+            <h3 class="card-title">Impacto Inmediato (30s)</h3>
+            <p class="card-desc">Comprensión instantánea de la propuesta. En medio minuto el usuario reconoce la calidez
+              humana de Joana y Yoshi, la vista al mar y su camino ideal.</p>
+            <span class="card-footer-badge">Experiencia de Usuario</span>
+          </div>
+
+          <div class="card">
+            <div class="card-icon gold">🌿</div>
+            <h3 class="card-title">Los 4 Caminos Claros</h3>
+            <p class="card-desc">Estructuración simple y sin dudas: 1) Yoga Dinámico/Restaurativo, 2) Pilates Suelo, 3)
+              Stretching Postural, 4) Movimiento desde Cero para principiantes.</p>
+            <span class="card-footer-badge">Claridad Comercial</span>
+          </div>
+
+          <div class="card">
+            <div class="card-icon navy">💬</div>
+            <h3 class="card-title">Cero Fricción al Contacto</h3>
+            <p class="card-desc">Botón flotante directo al WhatsApp oficial (+54 9 2262) y clase comunitaria abierta de
+              35 minutos en YouTube para romper cualquier barrera de entrada.</p>
+            <span class="card-footer-badge">Conversión Directa</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: EL MAPA DE LOS 7 DOCUMENTOS -->
+      <div class="slide" data-slide="3">
+        <div class="slide-eyebrow">Arquitectura Documental</div>
+        <h2 class="slide-title">7 Documentos Ejecutivos (Máx. 3 Páginas c/u)</h2>
+        <p class="slide-subtitle">Una estructura modular y ágil: sin manuales extensos de 40 páginas. Cada documento
+          resuelve una pieza concreta del engranaje operativo.</p>
+
+        <div class="grid-4">
+          <div class="card">
+            <div class="card-icon">01</div>
+            <h3 class="card-title">Plan Maestro</h3>
+            <p class="card-desc">Visión global, 6 fases de trabajo, 3 hitos de validación con las socias y calendario
+              semestral.</p>
+            <span class="card-footer-badge">2 Páginas</span>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">02</div>
+            <h3 class="card-title">Tareas de Perfiles</h3>
+            <p class="card-desc">Checklist de 15 puntos para Semana 1, verificación bilateral Joana/Yoshi y reporte en 4
+              cuadrantes.</p>
+            <span class="card-footer-badge">3 Páginas</span>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">03</div>
+            <h3 class="card-title">Web y Tienda</h3>
+            <p class="card-desc">Diseño de 7 bloques, pasarela Mercado Pago ($0 costo fijo mensual) y sinergia con
+              @vibramas_tienda.</p>
+            <span class="card-footer-badge">2 Páginas</span>
+          </div>
+
+          <div class="card">
+            <div class="card-icon gold">04</div>
+            <h3 class="card-title">Creación Contenido</h3>
+            <p class="card-desc">Diagnóstico de YouTube, engagement, rescate de fotos históricas y sinergia con eventos.
+            </p>
+            <span class="card-footer-badge">2 Páginas</span>
+          </div>
+
+          <div class="card">
+            <div class="card-icon gold">05</div>
+            <h3 class="card-title">Hardware & Audio</h3>
+            <p class="card-desc">Micrófonos duales con deadcat antiviento para la playa, trípode de 1.80m y backup en
+              SSD de 1 TB.</p>
+            <span class="card-footer-badge">1 Página</span>
+          </div>
+
+          <div class="card">
+            <div class="card-icon gold">06</div>
+            <h3 class="card-title">Gestión y Audiencias</h3>
+            <p class="card-desc">Los 10 puntos: 4 segmentos de público, embudo de alumnos, WhatsApp y portal híbrido con
+              IA.</p>
+            <span class="card-footer-badge">2 Páginas</span>
+          </div>
+
+          <div class="card">
+            <div class="card-icon navy" style="grid-column: span 2;">07</div>
+            <h3 class="card-title">Calendario y Gantt (Landscape)</h3>
+            <p class="card-desc">Hoja de ruta semestral: Ciclo 1 (Meses 1-3 Lanzamiento) y Ciclo 2 (Meses 4-6 E-Commerce
+              y Escala).</p>
+            <span class="card-footer-badge">3 Págs &bull; Horizontal</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: SEMANA 1 - CHECKLIST DE LAS SOCIAS -->
+      <div class="slide" data-slide="4">
+        <div class="slide-eyebrow">Acción Inmediata &bull; Semana 1</div>
+        <h2 class="slide-title">Los 15 Checkpoints Operativos (Joana &amp; Yoshi)</h2>
+        <p class="slide-subtitle">Descomponemos decisiones en pasos concretos. Con 15 minutos al día, las socias
+          completan la validación sin frenar al equipo técnico.</p>
+
+        <div class="grid-2">
+          <div class="card" style="padding: 14px 18px;">
+            <table class="checklist-table">
+              <thead>
+                <tr>
+                  <th>N°</th>
+                  <th>Checkpoint Clave</th>
+                  <th>Responsable</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>01</strong></td>
+                  <td>LinkedIn B2B (Pausas activas corporativas)</td>
+                  <td><span class="badge-check">Joana &bull; Yoshi</span></td>
+                </tr>
+                <tr>
+                  <td><strong>02</strong></td>
+                  <td>WhatsApp Business oficial y bienvenida</td>
+                  <td><span class="badge-check">Bilateral</span></td>
+                </tr>
+                <tr>
+                  <td><strong>03</strong></td>
+                  <td>Carga de 20 fotos alta calidad a Google Drive</td>
+                  <td><span class="badge-check">Joana &bull; Yoshi</span></td>
+                </tr>
+                <tr>
+                  <td><strong>04</strong></td>
+                  <td>Difusión de clase gratuita YouTube (35 min)</td>
+                  <td><span class="badge-check">Redes / Estados</span></td>
+                </tr>
+                <tr>
+                  <td><strong>05</strong></td>
+                  <td>Encuesta Google Forms para alumnas</td>
+                  <td><span class="badge-check">Comunidad</span></td>
+                </tr>
+                <tr>
+                  <td><strong>06</strong></td>
+                  <td>Grilla oficial de horarios y las 4 disciplinas</td>
+                  <td><span class="badge-check">Joana &bull; Yoshi</span></td>
+                </tr>
+                <tr>
+                  <td><strong>07</strong></td>
+                  <td>Selección de productos iniciales de Tienda</td>
+                  <td><span class="badge-check">@vibramas_tienda</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card" style="padding: 14px 18px;">
+            <table class="checklist-table">
+              <thead>
+                <tr>
+                  <th>N°</th>
+                  <th>Checkpoint Clave</th>
+                  <th>Responsable</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>08</strong></td>
+                  <td>Planificación de retiros de playa y cupos</td>
+                  <td><span class="badge-check">Joana &bull; Yoshi</span></td>
+                </tr>
+                <tr>
+                  <td><strong>09</strong></td>
+                  <td>Definición de alcance de Zona de Alumnos</td>
+                  <td><span class="badge-check">Reunión Socias</span></td>
+                </tr>
+                <tr>
+                  <td><strong>10</strong></td>
+                  <td>Esquema de cobranza (Alias + Mercado Pago)</td>
+                  <td><span class="badge-check">Finanzas</span></td>
+                </tr>
+                <tr>
+                  <td><strong>11</strong></td>
+                  <td>Estrategia de Ads (Prioridad Orgánico + IA)</td>
+                  <td><span class="badge-check">Reunión Socias</span></td>
+                </tr>
+                <tr>
+                  <td><strong>12</strong></td>
+                  <td>Definición de métricas mensuales a consultar</td>
+                  <td><span class="badge-check">Soporte Técnico</span></td>
+                </tr>
+                <tr>
+                  <td><strong>13</strong></td>
+                  <td>Vinculación de redes para automatización IA</td>
+                  <td><span class="badge-check">Técnico / Socias</span></td>
+                </tr>
+                <tr>
+                  <td><strong>14</strong></td>
+                  <td>Convocatoria a facilitadores conscientes</td>
+                  <td><span class="badge-check">Alianzas</span></td>
+                </tr>
+                <tr>
+                  <td><strong>15</strong></td>
+                  <td>Instalación de app Google Drive en móviles</td>
+                  <td><span class="badge-check">¡Crítico Día 1!</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: PRESENCIA WEB & TIENDA MIXTA -->
+      <div class="slide" data-slide="5">
+        <div class="slide-eyebrow">Infraestructura Digital &bull; Doc 03</div>
+        <h2 class="slide-title">Web Propia de Alto Impacto &amp; Tienda Mixta</h2>
+        <p class="slide-subtitle">Arquitectura liviana, moderna y responsiva. Eliminamos los costos mensuales de Shopify
+          y potenciamos la cobranza directa.</p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-icon">🌐</div>
+            <h3 class="card-title">7 Bloques Esenciales</h3>
+            <p class="card-desc">Hero inmersivo &bull; Los 4 Caminos &bull; Quiénes Somos (calidez) &bull; Puerta
+              Comunitaria (YouTube) &bull; Tienda &bull; Testimonios &bull; Contacto WhatsApp directo.</p>
+            <span class="card-footer-badge">Diseño a Medida</span>
+          </div>
+
+          <div class="card">
+            <div class="card-icon gold">💳</div>
+            <h3 class="card-title">Mercado Pago vs. Shopify</h3>
+            <p class="card-desc"><strong>Shopify descartado:</strong> $39 USD/mes fijos + 2%
+              comisión.<br /><strong>Desarrollo propio:</strong> $0 costo fijo mensual; comisión de 3.99% a 5.99% solo
+              cuando se vende.</p>
+            <span class="card-footer-badge">Financieramente Eficiente</span>
+          </div>
+
+          <div class="card">
+            <div class="card-icon navy">🛍️</div>
+            <h3 class="card-title">Catálogo Físico + Servicios</h3>
+            <p class="card-desc">Sinergia con @vibramas_tienda (velas de soja, mats, almohadillas) junto al cobro de
+              pases mensuales, bonos de clases y señas de retiros en la costa.</p>
+            <span class="card-footer-badge">E-Commerce Mixto</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 6: EQUIPAMIENTO Y HARDWARE -->
+      <div class="slide" data-slide="6">
+        <div class="slide-eyebrow">Producción Técnica &bull; Docs 04 y 05</div>
+        <h2 class="slide-title">Calidad Audiovisual: El Audio es el 70%</h2>
+        <p class="slide-subtitle">En clases de yoga, meditación y sonido frente al mar, una imagen nítida con mal audio
+          arruina la práctica. Especificamos solo lo estrictamente necesario.</p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-icon">🎙️</div>
+            <h3 class="card-title">Micrófonos Duales Inalámbricos</h3>
+            <p class="card-desc">2 transmisores solaperos + 1 receptor móvil. Incorporan capuchón antiviento (deadcat)
+              para rodajes impecables en playa y médanos de Necochea.</p>
+            <span class="card-footer-badge">Inversión Prioridad 1</span>
+          </div>
+
+          <div class="card">
+            <div class="card-icon gold">📐</div>
+            <h3 class="card-title">Trípode 1.80m &amp; Luz Cálida</h3>
+            <p class="card-desc">Trípode basculante alto para encuadrar posturas de pie sin deformación. Panel LED
+              cálido (3000K-4000K) para transmitir calma y serenidad en interiores.</p>
+            <span class="card-footer-badge">Estabilidad y Tono</span>
+          </div>
+
+          <div class="card">
+            <div class="card-icon navy">💾</div>
+            <h3 class="card-title">Backup Seguro en SSD de 1 TB</h3>
+            <p class="card-desc">Disco externo portátil NVMe de 1 TB para descargar videos 4K de los celulares
+              semanalmente y evitar la saturación de los dispositivos de las socias.</p>
+            <span class="card-footer-badge">Cero Pérdida de Archivos</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 7: CONTENIDOS, REDES Y AUDIENCIAS -->
+      <div class="slide" data-slide="7">
+        <div class="slide-eyebrow">Estrategia Multicanal &bull; Doc 06</div>
+        <h2 class="slide-title">4 Segmentos de Alumnas &amp; Canales Oficiales</h2>
+        <p class="slide-subtitle">Vibra Más habla con un tono empático y descontracturado. Abordamos cada público por su
+          canal natural sin duplicar esfuerzos.</p>
+
+        <div class="grid-4">
+          <div class="card">
+            <div class="card-icon">1</div>
+            <h3 class="card-title">Movimiento desde Cero</h3>
+            <p class="card-desc">Adultos (35-65 años), sedentarios o con dolores lumbares. Enfoque: salud, pausa y cero
+              posturas intimidantes.</p>
+            <span class="card-footer-badge">Instagram / WhatsApp</span>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">2</div>
+            <h3 class="card-title">Practicantes Regulares</h3>
+            <p class="card-desc">Búsqueda de constancia, alineación y profundidad. Clases completas en YouTube y pases
+              de sala.</p>
+            <span class="card-footer-badge">YouTube / Sala</span>
+          </div>
+
+          <div class="card">
+            <div class="card-icon gold">3</div>
+            <h3 class="card-title">Deportistas Vida Real</h3>
+            <p class="card-desc">Jugadores de pádel, runners y futbolistas. Enfoque: flexibilidad, prevención de
+              lesiones y recuperación.</p>
+            <span class="card-footer-badge">Reels / Shorts</span>
+          </div>
+
+          <div class="card">
+            <div class="card-icon navy">4</div>
+            <h3 class="card-title">Corporativo &amp; Empresas</h3>
+            <p class="card-desc">Pausas activas y convenios de bienestar para empresas locales y zonales.</p>
+            <span class="card-footer-badge">LinkedIn / B2B</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 8: CALENDARIO SEMESTRAL Y GANTT -->
+      <div class="slide" data-slide="8">
+        <div class="slide-eyebrow">Hoja de Ruta 6 Meses &bull; Doc 07</div>
+        <h2 class="slide-title">Calendario Maestro y Fases de Crecimiento</h2>
+        <p class="slide-subtitle">Una transición gradual y ordenada: primero validamos los cimientos y la web; luego
+          escalamos la tienda online y los procesos.</p>
+
+        <div class="timeline-strip">
+          <div class="timeline-month">
+            <div class="timeline-badge">MES 1</div>
+            <div class="timeline-content">
+              <h4>Conocimiento y Cimientos (Semanas 1 a 4)</h4>
+              <p>Reunión inicial &bull; Setup Google Drive oficial &bull; Presupuestos &bull; Maquetación preliminar de
+                la web y pruebas de diseño visual.</p>
+            </div>
+          </div>
+
+          <div class="timeline-month">
+            <div class="timeline-badge">MES 2</div>
+            <div class="timeline-content">
+              <h4>Implementación y Puesta en Marcha (Semanas 5 a 8)</h4>
+              <p>Contratación hosting &bull; Pruebas de actualización de contenido diario y semanal &bull; Balance de
+                gastos &bull; Compra del kit de audio dual.</p>
+            </div>
+          </div>
+
+          <div class="timeline-month">
+            <div class="timeline-badge">MES 3</div>
+            <div class="timeline-content">
+              <h4>Mejoras y Validación Transaccional (Semanas 9 a 12)</h4>
+              <p>Publicación de novedades y eventos &bull; Proyección de app móvil &bull; Testing de cobros online
+                &bull; Evaluación trimestral y diseño de Ciclo 2.</p>
+            </div>
+          </div>
+
+          <div class="timeline-month">
+            <div class="timeline-badge cycle2">MESES 4-6</div>
+            <div class="timeline-content">
+              <h4>Ciclo 2: Estandarización, E-Commerce y Escala (Semanas 13 a 24)</h4>
+              <p><strong>Mes 4:</strong> Manuales de proceso y formalización Tienda Vibra &bull; <strong>Mes 5:</strong>
+                Carrito online multiplataforma y stock &bull; <strong>Mes 6:</strong> Automatización total con IA.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 9: GOBERNANZA CLOUD -->
+      <div class="slide" data-slide="9">
+        <div class="slide-eyebrow">Gestión de Archivos &bull; Drive Oficial</div>
+        <h2 class="slide-title">Gobernanza Cloud: Adiós al Desorden en WhatsApp</h2>
+        <p class="slide-subtitle">Todo el material digital de Vibra Más vive centralizado, seguro y ordenado en una
+          carpeta raíz única compartida.</p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-icon">📁</div>
+            <h3 class="card-title">Carpeta Oficial Directa</h3>
+            <p class="card-desc">Acceso compartido directo a <code>00_Gobernanza_y_Planes_Maestros</code> en Google
+              Drive, con sincronización móvil para Joana y Yoshi.</p>
+            <a href="https://drive.google.com/drive/folders/1tRCQiAtO5I9c3do4pdCgR_ixU_603L7j" target="_blank"
+              class="btn btn-secondary" style="margin-top: 10px; font-size: 11.5px; padding: 6px 12px;">Abrir Google
+              Drive</a>
+          </div>
+
+          <div class="card">
+            <div class="card-icon gold">📸</div>
+            <h3 class="card-title">Cero Fotos por WhatsApp</h3>
+            <p class="card-desc">Las fotos de clases y productos se suben directamente a la nube desde la app de Drive
+              para mantener la resolución original 4K/HD sin compresión.</p>
+            <span class="card-footer-badge">Calidad Preservada</span>
+          </div>
+
+          <div class="card">
+            <div class="card-icon navy">🏷️</div>
+            <h3 class="card-title">Nomenclatura Estándar</h3>
+            <p class="card-desc">Estructura simple: <code>AAAA-MM-DD_[Pilar]_[Tema]_[Version]</code>.<br />Ejemplo:
+              <code>2026-10-15_Yoga_PosturaGato_V1.mp4</code>.</p>
+            <span class="card-footer-badge">Orden Definitivo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 10: PRÓXIMOS PASOS -->
+      <div class="slide hero-slide" data-slide="10">
+        <div class="hero-badge">Compromiso y Cierre</div>
+        <h2 class="hero-title" style="font-size: 38px;">¿Listas para <span>Vibrar Más</span>?</h2>
+        <p class="hero-tagline" style="margin-bottom: 24px;">El camino está trazado, los documentos simplificados y la
+          tecnología lista para respaldar su vocación docente.</p>
+
+        <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+          <a href="https://drive.google.com/drive/folders/1tRCQiAtO5I9c3do4pdCgR_ixU_603L7j" target="_blank"
+            class="btn btn-primary" style="font-size: 15px; padding: 12px 24px;">
+            📁 Ir a la Carpeta de Google Drive
+          </a>
+          <button class="btn btn-gold" onclick="window.print()" style="font-size: 15px; padding: 12px 24px;">
+            🖨️ Imprimir / Guardar en PDF
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer Controls -->
+    <div class="deck-footer">
+      <div class="footer-help">
+        <span>Navegación: <span class="kbd">&larr;</span> <span class="kbd">&rarr;</span> o <span
+            class="kbd">Espacio</span></span>
+        <span>Modo Presentación: <span class="kbd">F</span></span>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn btn-secondary" id="btnPrev">Anterior</button>
+        <button class="btn btn-primary" id="btnNext">Siguiente</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 10;
+    const slides = document.querySelectorAll('.slide');
+    const progressFill = document.getElementById('progressFill');
+    const slideBadge = document.getElementById('slideBadge');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+
+    function updateSlide(newSlide) {
+      if (newSlide < 1) newSlide = 1;
+      if (newSlide > totalSlides) newSlide = totalSlides;
+
+      slides.forEach(slide => {
+        const slideIndex = parseInt(slide.getAttribute('data-slide'));
+        slide.classList.remove('active', 'prev');
+        if (slideIndex === newSlide) {
+          slide.classList.add('active');
+        } else if (slideIndex < newSlide) {
+          slide.classList.add('prev');
+        }
+      });
+
+      currentSlide = newSlide;
+      progressFill.style.width = `${(currentSlide / totalSlides) * 100}%`;
+      slideBadge.textContent = `Slide ${currentSlide} / ${totalSlides}`;
+
+      btnPrev.disabled = (currentSlide === 1);
+      btnNext.textContent = (currentSlide === totalSlides) ? 'Finalizar' : 'Siguiente';
+    }
+
+    btnPrev.addEventListener('click', () => updateSlide(currentSlide - 1));
+    btnNext.addEventListener('click', () => {
+      if (currentSlide === totalSlides) {
+        updateSlide(1);
+      } else {
+        updateSlide(currentSlide + 1);
+      }
+    });
+
+    // Keyboard events
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        updateSlide(currentSlide + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        updateSlide(currentSlide - 1);
+      } else if (e.key === 'f' || e.key === 'F') {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => { });
+        } else {
+          document.exitFullscreen().catch(() => { });
+        }
+      }
+    });
+
+    // Touch / Swipe Support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, false);
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchEndX < touchStartX - 50) {
+        updateSlide(currentSlide + 1);
+      }
+      if (touchEndX > touchStartX + 50) {
+        updateSlide(currentSlide - 1);
+      }
+    }, false);
+
+    updateSlide(1);
+  </script>
+</body>
+
+</html>
